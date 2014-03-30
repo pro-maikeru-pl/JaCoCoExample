@@ -9,15 +9,6 @@ package { "oracle-java7-set-default":
   require => Package["oracle-java7-installer"],
 }
 
-
-exec { "accept_license" :
-  command => "echo 'debconf shared/accepted-oracle-license-v1-1 select true' | debconf-set-selections && echo 'debconf shared/accepted-oracle-license-v1-1 seen true' | debconf-set-selections",
-  path => ["/bin/", "/usr/bin"],
-  before => Package["oracle-java7-installer"],
-  unless => "dpkg -l | grep -cq oracle-jdk7-installer",
-  logoutput => true,
-}
-
 # ========= required tools
 
 package { "htop":
